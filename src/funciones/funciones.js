@@ -4,9 +4,9 @@ export function sumar(a, b) {
 }
 
 export function esMayorDeEdad(edad){
-    return edad >= 18
+    return edad >= 20
 }
 
 export function saludar(nombre){
-    return `Hola, ${nombre}`
+    return `Hola, ${nombre}!`
 }
