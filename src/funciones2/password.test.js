@@ -54,34 +54,188 @@ describe("validarPassword - casos inválidos", () => {
 // ─────────────────────────────────────────────────────────────────────
 
 describe("validarPassword - valores límite de longitud", () => {
-  test.todo("acepta una contraseña de 20 caracteres");
-  test.todo("rechaza una contraseña de 7 caracteres");
-  test.todo("rechaza una contraseña de 21 caracteres");
+  test("acepta una contraseña de 20 caracteres", () => {
+    //Arrange
+    const pass = "87459736125097573S48"
+
+    //Act
+    const resultado = validarPassword(pass);
+
+    //Assert
+    expect(resultado).toEqual({ valida: true, errores: [] });
+  });
+
+  test("rechaza una contraseña de 7 caracteres", () => {
+    //Arrange
+    const pass = "836A256"
+
+    //Act
+    const resultado = validarPassword(pass)
+
+    //Assert
+    expect(resultado).toEqual({ valida: false, errores: [MENSAJES.LONGITUD] })
+
+  });
+
+  test("rechaza una contraseña de 21 caracteres", () => {
+    //Arrange
+    const pass = "58693867A9J35VL6098VW"
+
+    //Act
+    const resultado = validarPassword(pass)
+
+    //Assert
+    expect(resultado).toEqual({ valida: false, errores: [MENSAJES.LONGITUD] })
+
+  });
 });
 
 describe("validarPassword - reglas de contenido", () => {
-  test.todo("rechaza una contraseña sin números");
-  test.todo("rechaza una contraseña con un espacio al principio");
-  test.todo("rechaza una contraseña con un espacio en el medio");
-  test.todo("rechaza una contraseña con un espacio al final");
+  test("rechaza una contraseña sin números", () => {
+    //Arrange
+    const pass = "ANOEFWVEI"
+
+    //Act
+    const resultado = validarPassword(pass)
+
+    //Assert
+    expect(resultado).toEqual({ valida: false, errores: [MENSAJES.NUMERO] })
+  });
+
+  test("rechaza una contraseña con un espacio al principio", () => {
+    //Arrange
+    const pass = " NEOWC5M87"
+
+    //Act
+    const resultado = validarPassword(pass)
+
+    //Assert
+    expect(resultado).toEqual({ valida: false, errores: [MENSAJES.ESPACIOS] })
+  });
+
+  test("rechaza una contraseña con un espacio en el medio", () => {
+    //Arrange
+    const pass = "A8P6H 57V39"
+
+    //Act
+    const resultado = validarPassword(pass)
+
+    //Assert
+    expect(resultado).toEqual({ valida: false, errores: [MENSAJES.ESPACIOS] })
+  });
+
+  test("rechaza una contraseña con un espacio al final", () => {
+    //Arrange
+    const pass = "MBOGFFC8 "
+
+    //Act
+    const resultado = validarPassword(pass)
+
+    //Assert
+    expect(resultado).toEqual({ valida: false, errores: [MENSAJES.ESPACIOS] })
+  });
+
 });
 
 describe("validarPassword - acumulación de errores", () => {
-  test.todo("devuelve 2 errores si faltan mayúscula y número");
-  test.todo("devuelve 4 errores si viola todas las reglas");
+  test("devuelve 2 errores si faltan mayúscula y número", () => {
+    //Arrange
+    const pass = "onmbnfdswx"
+
+    //Act
+    const resultado = validarPassword(pass)
+
+    //Assert
+    expect(resultado).toEqual({ valida: false, errores: [MENSAJES.MAYUSCULA, MENSAJES.NUMERO] })
+  });
+  test("devuelve 4 errores si viola todas las reglas", () => {
+    //Arrange
+    const pass = "sbn "
+
+    //Act
+    const resultado = validarPassword(pass)
+
+    //Assert
+    expect(resultado).toEqual({ valida: false, errores: [MENSAJES.LONGITUD, MENSAJES.MAYUSCULA, MENSAJES.NUMERO, MENSAJES.ESPACIOS] })
+  });
 });
 
 describe("validarPassword - entradas inesperadas", () => {
-  test.todo("rechaza una cadena vacía sin lanzar excepción");
-  test.todo("rechaza null sin lanzar excepción");
-  test.todo("rechaza undefined sin lanzar excepción");
-  test.todo("rechaza un número sin lanzar excepción");
+  test("rechaza una cadena vacía sin lanzar excepción", () => {
+    //Arrange
+    const pass = ""
+
+    //Act
+    const resultado = validarPassword(pass)
+
+    //Assert
+    expect(resultado).toEqual({ valida: false, errores: [MENSAJES.LONGITUD, MENSAJES.MAYUSCULA, MENSAJES.NUMERO] })
+  });
+
+  test("rechaza null sin lanzar excepción", () => {
+    //Arrange
+    const pass = null
+
+    //Act
+    const resultado = validarPassword(pass)
+
+    //Assert
+    expect(resultado).toEqual({ valida: false, errores: [MENSAJES.TIPO] })
+  });
+
+  test("rechaza undefined sin lanzar excepción", () => {
+    //Arrange
+    const pass = undefined
+
+    //Act
+    const resultado = validarPassword(pass)
+
+    //Assert
+    expect(resultado).toEqual({ valida: false, errores: [MENSAJES.TIPO] })
+  });
+
+  test("rechaza un número sin lanzar excepción", () => {
+    //Arrange
+    const pass = 79
+
+    //Act
+    const resultado = validarPassword(pass)
+
+    //Assert
+    expect(resultado).toEqual({ valida: false, errores: [MENSAJES.TIPO] })
+  });
+
 });
 
 describe("validarPassword - caracteres del español", () => {
-  test.todo("acepta una contraseña con ñ");
-  test.todo("acepta una contraseña con acentos");
+  test("acepta una contraseña con ñ", () => {
+    //Arrange
+    const pass = "9765Ñ567"
+
+    //Act
+    const resultado = validarPassword(pass)
+
+    //Assert
+    expect(resultado).toEqual({ valida: true, errores: [] })
+  });
+
+  test("acepta una contraseña con acentos", () => {
+    //Arrange
+    const pass = "M98674É3"
+
+    //Act
+    const resultado = validarPassword(pass)
+
+    //Assert
+    expect(resultado).toEqual({ valida: true, errores: [] })
+  });
 });
+
+
+
+
+
+
 
 /*
 |
