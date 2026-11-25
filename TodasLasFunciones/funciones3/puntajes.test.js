@@ -44,11 +44,57 @@ describe("calcularPuntaje", () => {
     expect(resultado).toBe(30);
   });
 
-  test.todo("resta 5 puntos por cada error");
-  test.todo("devuelve 0 cuando no hay aciertos ni errores");
-  test.todo("devuelve 0 cuando los errores restan justo lo mismo que suman los aciertos");
-  test.todo("devuelve 0, y no un número negativo, cuando los errores restan más de lo que suman los aciertos");
+    test("resta 5 puntos por cada error", () => {
+        //Arrange
+        const aciertos = 5
+        const errores = 3
+
+        //Act
+        const resultado = calcularPuntaje(aciertos, errores)
+
+        //Assert
+        expect(resultado).toBe(35)
+
+    });
+
+    test("devuelve 0 cuando no hay aciertos ni errores", () => {
+        //Arrange
+        const aciertos = 0
+        const errores = 0
+
+        //Act
+        const resultado = calcularPuntaje(aciertos, errores)
+
+        //Assert
+        expect(resultado).toBe(0)
+    });
+
+    test("devuelve 0 cuando los errores restan justo lo mismo que suman los aciertos", () => {
+        //Arrange
+        const aciertos = 3
+        const errores = 6
+
+        //Act
+        const resultado = calcularPuntaje(aciertos, errores)
+
+        //Assert
+        expect(resultado).toBe(0)
+    });
+
+    test("devuelve 0, y no un número negativo, cuando los errores restan más de lo que suman los aciertos", () => {
+        //Arrange
+        const aciertos = 1
+        const errores = 5
+
+        //Act
+        const resultado = calcularPuntaje(aciertos, errores)
+
+        //Assert
+        expect(resultado).toBe(0)
+    });
+
 });
+
 
 // ─────────────────────────────────────────────────────────────────────
 // EJERCICIO 2
@@ -61,8 +107,15 @@ describe("medalla", () => {
     expect(medalla(250)).toBe("bronce");
   });
 
-  test.todo("devuelve 'sin medalla' con un puntaje de 50");
-  test.todo("devuelve 'plata' con un puntaje de 700");
+  test("devuelve 'sin medalla' con un puntaje de 50", () => {
+    expect(medalla(50)).toBe("sin medalla")
+  });
+
+  test("devuelve 'plata' con un puntaje de 700", () => {
+    
+  });
+
+
   test.todo("devuelve 'oro' con un puntaje de 3000");
 
   test.todo("devuelve 'sin medalla' con 99 puntos (le falta uno para bronce)");
