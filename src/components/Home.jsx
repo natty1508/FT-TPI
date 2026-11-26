@@ -1,15 +1,15 @@
-import Banner from "./Banner"
+import banner from "../assets/banner.png"
 import ProductCard from "./ProductCard"
 import smash from "../assets/smash.jpg"
 import monster from "../assets/monster.jpg"
-import Filtros from "./Filtros" 
+import Filtros from "./Filtros"
 import MenuLateral from "./MenuLateral"
 
 export default function Home() {
     return (
         <div style={{ marginLeft: "200px" }}>
             <MenuLateral esAdmin={true} />
-            <Banner />
+            <img className="banner" src={banner} alt="hamburguesas que se piden dos veces" />
             <Filtros />
 
             <ProductCard imagen={smash} nombre="Doble Smash Cheddar & Bacon" detalles="Incluye papas y coca cola" precio={20000} />
